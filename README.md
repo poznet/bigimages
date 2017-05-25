@@ -1,3 +1,7 @@
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/f7b6a32f-d21d-450d-b916-7d99b1c78070/big.png)](https://insight.sensiolabs.com/projects/f7b6a32f-d21d-450d-b916-7d99b1c78070)
+
+
+
 # Standalone image optimization tool for jpg and png 
 Tool finds images in given location, and compress  them.
 
