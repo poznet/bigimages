@@ -1,6 +1,7 @@
 <?php
 namespace Poznet\mini;
 
+use Poznet\mini\twig\TwigRoundExtension;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -11,6 +12,7 @@ if(!$session) $session=new Session();
 $session->start();
 $loader = new \Twig_Loader_Filesystem(__DIR__.'/tpl');
 $twig = new \Twig_Environment($loader);
+
 
 $id=$request->get('id');
 

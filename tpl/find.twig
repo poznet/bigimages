@@ -28,7 +28,7 @@
                                 <label><input type="checkbox" name="files[{{ file }}]"></label>
                             </div>
                         </td>
-                        <td>{{ (file.size /1000 )| round }} kb</td>
+                        <td>{{ '%.2f' | format((file.size /1000 ))  }} kb</td>
                         <td>{{ session.dir }}/{{  file.RelativePathname }}</td>
                     </tr>
 

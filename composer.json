@@ -9,9 +9,11 @@
         }
     ],
     "require": {
-        "tinify/tinify": "^1.5",
-        "symfony/finder": "^3.2",
-        "symfony/http-foundation": "^3.2",
-        "twig/twig": "^2.3"
+        "tinify/tinify": "1.1.1",
+        "symfony/finder": "2.8",
+        "symfony/http-foundation": "2.8",
+        "twig/twig": "1.8"
     }
+
+
 }
