@@ -1,3 +1,5 @@
 /vendor
 /page
 /.idea
+.composer.lock
+

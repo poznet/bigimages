@@ -2,7 +2,7 @@
 
 $tab=[];
 $files=$request->get('files');
-if(($request->getMethod()=="POST") and (count($files)>0)) {
+if(($request->getMethod()=="POST") && (count($files)>0)) {
     \Tinify\Tinify::setKey($session->get('api'));
     foreach ($files as $file => $status) {
         if ($status == 'on') {
