@@ -1,7 +1,7 @@
 {
     "name": "pozyc/mini",
-    "decription": "Image optimistaion/resizing tool",
-    "licence" : "MIT",
+    "description": "Image optimistaion/resizing tool",
+    "license": "MIT",
     "authors": [
         {
             "name": "mg",
