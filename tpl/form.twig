@@ -1,0 +1,58 @@
+{% extends 'base.twig' %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12" style="margin-bottom:50px;">
+            Fill form below, and  script fill find images according to filled data.<br/>
+            You can obtain apikey from <a href="https://tinypng.com">h</a> (each month you have 500 images for free)
+        </div>
+        <div class="col-xs-12">
+
+
+            <form class="form-horizontal"  action="index.php?id=1" method="post">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="api">API KEY:</label>
+                    <div class="col-sm-8">
+                        <input type="text" value="{{ session.get('api')}}" class="form-control" name="api" id="api" placeholder="Enter TINYJPEG api key">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="path">Relative path to search:</label>
+                    <div class="col-sm-8">
+                        <input type="text" value="{{ session.get('dir')}}" class="form-control" name="dir" placeholder="Enter Relative path">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="path">Filetypes:</label>
+                    <div class="col-sm-8">
+                        <input type="checkbox" name="filetypes[]" value="*.jpg" {% if '*.jpg' in session.get('filetypes') %}checked{%  endif %}>*.jpg &nbsp;&nbsp;&nbsp;
+                        <input type="checkbox" name="filetypes[]" value="*.png" {% if '*.png' in session.get('filetypes') %}checked{%  endif %} >*.png &nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="path">Size bigger than:</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="size"   value="{{ session.get('size')!='' ? session.get('size'):1}}" class="form-control" style="width:50%;display:inline-block;">
+                        <select name="stype" id="" class="form-control" style="width:90px;display:inline-block;">
+                            <option value="K" {% if session.get('stype')=="K" %}selected{% endif %}>Kb</option>
+                            <option value="M"  {% if session.get('stype')=="M" or session.get('stype')=='' %}selected{% endif %}>Mb</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <button type="submit" class="btn btn-primary">Search for fotos</button>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+
+        </div>
+    </div>
+{%  endblock %}
+

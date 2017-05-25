@@ -1,0 +1,44 @@
+{% extends 'base.twig' %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12" style="margin-bottom:50px;">
+            There are results
+        </div>
+        <div class="col-xs-12">
+
+            <form action="">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Path</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                {% for file,status in files %}
+
+                    <tr>
+                        <td>{{ file }}</td>
+                        <td>{% if status==true %}OK{% else %} NOT OK {% endif %}</td>
+                    </tr>
+
+                {% endfor %}
+                    </tbody>
+                    </table>
+            </form>
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-left"><a href="index.php" class="btn btn-warning"><- Back to setting</a></div>
+
+    </div>
+{%  endblock %}
+

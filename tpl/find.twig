@@ -1,0 +1,68 @@
+{% extends 'base.twig' %}
+{% block content %}
+    <form action="index.php?id=2" method="post">
+    <div class="row">
+        <div class="col-xs-12" style="margin-bottom:50px;">
+           Check witch images  you want to optimize.
+        </div>
+
+        <div class="col-xs-12">
+
+
+            <a id="checkAll" class="btn btn-default btn-xs">Check all</a>
+            <a id="unCheckAll" class="btn btn-default btn-xs">Uncheck all</a>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th> </th>
+                        <th>Size</th>
+                        <th>Path</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                {% for file in files %}
+
+                    <tr>
+                        <td>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="files[{{ file }}]"></label>
+                            </div>
+                        </td>
+                        <td>{{ (file.size /1000 )| round }} kb</td>
+                        <td>{{ session.dir }}/{{  file.RelativePathname }}</td>
+                    </tr>
+
+                {% endfor %}
+                    </tbody>
+                    </table>
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-left"><a href="index.php" class="btn btn-warning"><- Back to setting</a></div>
+        <div class="col-xs-6 text-right"><input type="submit" value="Optimize it ->" class="btn btn-success"></div>
+    </div>
+    </form>
+<script>
+    $("#checkAll").click(function(){
+
+        if (! $('input:checkbox').is('checked')) {
+            $('input:checkbox').prop('checked',true);
+
+        }
+    });
+    $("#unCheckAll").click(function(){
+
+        if (! $('input:checkbox').is('checked')) {
+            $('input:checkbox').prop('checked',false);
+        }
+    });
+</script>
+{%  endblock %}
+
