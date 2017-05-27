@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <div class="col-xs-12" style="margin-bottom:30px;">
-        <h3 class="text-center"> Image opymization/minification tool</h3>
+        <h3 class="text-center"> Image optymization/minification tool</h3>
     </div>
 
     {% for flashMessage in session.flashbag.get('error') %}
@@ -30,8 +30,10 @@
         <li {% block m2 %}{% endblock %}><a href="index.php?id=resize">Resize Images</a></li>
     </ul>
 <br/>
+    <div style="font:12px tahoma;">
 {% block content %}
 {% endblock %}
+    </div>
 </div>
 </body>
 </html>

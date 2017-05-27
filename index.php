@@ -32,6 +32,9 @@ switch ($id){
     case 'resizeresult':
         include('inc/resize-find.php');
         break;
+    case 'resizeit':
+        include('inc/resize-resize.php');
+        break;
     default:
         include('inc/form.php');
         break;
