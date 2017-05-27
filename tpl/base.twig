@@ -25,7 +25,11 @@
 
 
 
-
+    <ul class="nav nav-tabs">
+        <li {% block m1 %}{% endblock %}><a href="index.php?id=0">Compress Images (tinyjpg)</a></li>
+        <li {% block m2 %}{% endblock %}><a href="index.php?id=resize">Resize Images</a></li>
+    </ul>
+<br/>
 {% block content %}
 {% endblock %}
 </div>
