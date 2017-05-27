@@ -21,8 +21,9 @@ $finder->files();
 if($request->get('filetypes')!==null)
 foreach ($request->get('filetypes') as $file){
     $finder->name($file);
+    $finder->name(strtoupper($file));
 }
-$size='>='.$request->get('size').$request->get('stype');
+$size='>'.$request->get('size').$request->get('stype');
 $finder->size($size);
 $finder->depth('<10')->in(__DIR__.'/../'. $request->get('dir'));
 

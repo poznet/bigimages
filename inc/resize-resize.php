@@ -27,6 +27,8 @@ $h=null;
             });
             $result = $img->save($file);
             $after=$img->filesize();
+            $img->destroy();
+            unset($img);
 
             $tab[$file] = $result;
 

@@ -1,10 +1,13 @@
 <?php
+
 namespace Poznet\mini;
 
 use Poznet\mini\twig\TwigRoundExtension;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+set_time_limit(3600);
+ini_set('memory_limit', '256M');
 require('vendor/autoload.php');
 $request=Request::createFromGlobals();
 $session=$request->getSession();
