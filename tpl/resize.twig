@@ -2,8 +2,15 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-xs-12" style="margin-bottom:50px;">
-            There are results,  You  get additional {{ diff }} od  free space.
+        <div class="col-xs-12 text-center" style="margin-bottom:50px;" id="start">
+            <a  class="btn btn-success">Start</a>
+            <br/><br/>
+            <span id="total" style="display:none;">
+                Before operation  images used <b id="totalbefore">0</b> of space.
+                Now they use <b id="totalafter">0</b><br/>
+                You have additional <b id="totaltotal">0</b> free space.
+            </span>
+
         </div>
         <div class="col-xs-12">
 
@@ -13,16 +20,18 @@
                     <tr>
                         <th>Path</th>
                         <th>Status</th>
-                        <th>Size</th>
+                        <th>Size Before</th>
+                        <th>Size After</th>
                     </tr>
                     </thead>
                     <tbody>
                 {% for file,status in files %}
 
                     <tr>
-                        <td>{{ file }}</td>
-                        <td>{% if status==true %}OK{% else %} NOT OK {% endif %}</td>
-                        <td >{{ before[file] }}->{{ after[file] }}</td>
+                        <td><a class="resize" data-file="{{ file }}" data-id="{{ loop.index }}">{{ file }}</a></td>
+                        <td class="status" data-file="{{ file }}" data-id="{{ loop.index }}"> </td>
+                        <td class="sizebefore" data-file="{{ file }}" data-id="{{ loop.index }}"> </td>
+                        <td class="sizeafter" data-file="{{ file }}" data-id="{{ loop.index }}"> </td>
                     </tr>
 
                 {% endfor %}
@@ -44,3 +53,95 @@
     </div>
 {%  endblock %}
 {% block m2 %} class="active" {% endblock %}
+
+{% block js %}
+    <script>
+        function humanFileSize(bytes, si) {
+            var thresh = si ? 1000 : 1024;
+            if(Math.abs(bytes) < thresh) {
+                return bytes + ' B';
+            }
+            var units = si
+                    ? ['kB','MB','GB','TB','PB','EB','ZB','YB']
+                    : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+            var u = -1;
+            do {
+                bytes /= thresh;
+                ++u;
+            } while(Math.abs(bytes) >= thresh && u < units.length - 1);
+            return bytes.toFixed(1)+' '+units[u];
+        }
+
+
+        $( document ).ready(function() {
+            $( ".resize" ).click(function() {
+                plik=$(this).data('file');
+
+            });
+
+
+            $("#start").click(function(){
+                $("#total").slideDown();
+                $(".status").each(function(){
+                    pole=$(this);
+                    plik=$(this).data('file');
+                    id=$(this).data('id');
+                    after=$('.sizeafter[ data-id="'+id+'"]');
+
+
+                    //shrinking
+                    $.ajax({
+                        method: "POST",
+                        url: "ajax/resize.php",
+                        data:{ file:  plik },
+                        async:false
+                    })
+                        .done(function( data ) {
+                        pole.html(data);
+                    });
+
+                    //getting  new size
+                    $.ajax({
+                        method: "POST",
+                        url: "ajax/size.php",
+                        data:{ file:  plik },
+                        async:false
+                    })
+                      .done(function( data ) {
+                        after.html(humanFileSize(data));
+                          $('#totalafter').text(parseInt($('#totalafter').text())+parseInt(data));
+
+                          $('#totaltotal').text(parseInt($('#totalafter').text())-parseInt($('#totalbefore').text()) );
+                    });
+
+                })
+
+            });
+
+            $(".sizebefore").each(function(){
+                $("#total").slideDown();
+                pole=$(this);
+                plik=$(this).data('file');
+                id=$(this).data('id');
+
+
+                $.ajax({
+                    method: "POST",
+                    url: "ajax/size.php",
+                    data:{ file:  plik },
+                    async:false
+                })
+                  .done(function( data ) {
+                        pole.html(data);
+                        if(data!='ERROR'){
+                            pole.html(humanFileSize(data));
+                            console.log();
+                            $('#totalbefore').text(parseInt($('#totalbefore').text())+parseInt(data));
+                        }
+                    });
+
+               
+            })
+        });
+    </script>
+{%  endblock %}
